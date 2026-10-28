@@ -11,21 +11,26 @@ assessmentButton.addEventListener(
        if (userName.length === 0) {　//入力が空だったから
         return; 関数の処理を終了する
        }
-       console.log(assessment(userName));　//ログ出力をして確認
+       
  // 診断結果表示エリアの作成
     resultDivision.innerText = ''; //divタグを空文字で上書きする事で、空にしている。
-    tweetDivision.innerText  =''//Tweetのdivタグも空にする。
-    while (tweetDivision.firstChild) { 
-      tweettDivision.removeChild(resultDivision.firstChild)
-    }
-    const heading = document.createElement('h3')//h3の作成
-    heading.innerText = '診断結果';//タグの内側のテキストを設定
-    resultDivision.appendChild(heading);//divタグの子要素として追加
+    const headerDivision = document.createElement('h3')//h3の作成
+    headerDivision.setAttribute('class','card-header text-bg-primary');
+    headerDivision.innerText = '診断結果';//タグの内側のテキストを設定
+    resultDivision.appendChild(headerDivision);//divタグの子要素として追加
 
+    // bodyDivisionの作成
+    const bodyDivision = document.createElement('div')//divタグ作成
+    bodyDivision.setAttribute('class','card-body')// bootstap用のclassを設定
     const paragraph = document.createElement('p');//pタグの作成
+    paragraph.setAttribute('class', 'card-text')//class設定
     const result = assessment(userName);//診断結果を作成
     paragraph.innerText = result;//pタグの内側のテキストを設定
-    resultDivision.appendChild(paragraph);//divタグの小要素としてpタグを追加
+    bodyDivision.appendChild(paragraph)
+    resultDivision.appendChild(bodyDivision);//divタグの小要素としてpタグを追加
+
+    //resultDivisionにも Bootstarpのスタイルを適用する。
+    resultDivision.setAttribute('class','card')
 
     // X投稿ボタンの作成
     tweetDivision.innerText =''//Tweetのdivタグも空にする。
